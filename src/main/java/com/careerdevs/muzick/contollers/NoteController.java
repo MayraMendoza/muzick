@@ -1,0 +1,61 @@
+package com.careerdevs.muzick.contollers;
+
+import com.careerdevs.muzick.models.Listener;
+import com.careerdevs.muzick.models.Note;
+import com.careerdevs.muzick.repositories.ListenerRepository;
+import com.careerdevs.muzick.repositories.NoteRepository;
+import com.sun.xml.bind.v2.TODO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+
+@CrossOrigin
+@RestController
+@RequestMapping("api/notes")
+public class NoteController {
+    @Autowired
+    private NoteRepository noteRepository;
+
+    @Autowired
+    private ListenerRepository listenerRepository;
+
+    @GetMapping("/test")
+    public ResponseEntity<?> testRoute(){
+        return new ResponseEntity<>("note route", HttpStatus.OK);
+    }
+
+    @PostMapping("/{listener_id}")
+    public ResponseEntity<?> createNote(@PathVariable Long listenerId, @RequestBody Note newNote){
+       // TODO validate the listener id is an actual listener
+        Listener listener = listenerRepository.findById(listenerId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        newNote.setlistener(listener);
+        Note note =noteRepository.save(newNote);
+        return new ResponseEntity<>(note, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Note>> getAllNotes(){
+        List<Note> notes = noteRepository.findAll();
+        return new ResponseEntity<>(notes, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Note> getNoteById(@PathVariable Long id){
+        Note note = noteRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+        );
+        return new ResponseEntity<>(note, HttpStatus.OK);
+
+    }
+    @GetMapping("/listener/{listenerId}")
+    public ResponseEntity<List<Note>> getNotesByListener(@PathVariable Long listenerId){
+        List<Note> notes = noteRepository.findAllBylistener_id(listenerId);
+        return  new ResponseEntity<>(notes, HttpStatus.OK);
+
+    }
+}
