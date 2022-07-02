@@ -20,6 +20,7 @@ public class Note {
 //    @JsonIncludeProperties({"age","name})  // exclude all except listed.
     private Listener listener;
 
+
     public Note() {
     }
 
