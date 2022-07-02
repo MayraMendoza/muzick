@@ -16,8 +16,8 @@ public class Note {
     //Many notes to one listener
     @ManyToOne
     @JoinColumn(name ="listener_id", referencedColumnName= "id") // (name={variable_id})
-    @JsonIgnoreProperties({"age", "name"}) //include all except listed
-//    @JsonIncludeProperties("age")  // exclude all except listed.
+    @JsonIgnoreProperties("age") //include all except listed
+//    @JsonIncludeProperties({"age","name})  // exclude all except listed.
     private Listener listener;
 
     public Note() {
@@ -58,8 +58,8 @@ public class Note {
         return listener;
     }
 
-    public void setlistener(Listener creator) {
-        this.listener = creator;
+    public void setlistener(Listener listener) {
+        this.listener = listener;
     }
 
 

@@ -14,7 +14,7 @@ public class Listener {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //uuid (is a garanteed random number)
 
     private Long id;
-    private String Name;
+    private String name;
     private Integer age;
 
     // later we will add genre and user
@@ -40,7 +40,7 @@ public class Listener {
 
     public Listener(Long id, String name, Integer age) {
         this.id = id;
-        Name = name;
+        name = name;
         this.age = age;
 
     }
@@ -54,11 +54,11 @@ public class Listener {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Integer getAge() {
