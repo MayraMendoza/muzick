@@ -30,6 +30,7 @@ public class ListenerController {
     // Update = Post(more commonly used) PUT*  (expects a body)
     // Delete = DELETE (url)
 
+    // create a listener profile
     @PostMapping("/")
     public ResponseEntity<Listener> createLister(@RequestBody Listener newListener ){
         Listener listener = listenerRepository.save(newListener);

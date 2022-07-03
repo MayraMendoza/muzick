@@ -28,6 +28,7 @@ public class NoteController {
         return new ResponseEntity<>("note route", HttpStatus.OK);
     }
 
+    // create a note by listener
     @PostMapping("/{listener_id}")
     public ResponseEntity<?> createNote(@PathVariable Long listenerId, @RequestBody Note newNote){
        // TODO validate the listener id is an actual listener
@@ -37,6 +38,7 @@ public class NoteController {
         return new ResponseEntity<>(note, HttpStatus.CREATED);
     }
 
+    // get all notes
     @GetMapping("/all")
     public ResponseEntity<List<Note>> getAllNotes(){
         List<Note> notes = noteRepository.findAll();
@@ -44,6 +46,7 @@ public class NoteController {
 
     }
 
+    //Get note by id
     @GetMapping("/{id}")
     public ResponseEntity<Note> getNoteById(@PathVariable Long id){
         Note note = noteRepository.findById(id).orElseThrow(
@@ -52,6 +55,7 @@ public class NoteController {
         return new ResponseEntity<>(note, HttpStatus.OK);
 
     }
+    // get all notes a specific listener made
     @GetMapping("/listener/{listenerId}")
     public ResponseEntity<List<Note>> getNotesByListener(@PathVariable Long listenerId){
         List<Note> notes = noteRepository.findAllBylistener_id(listenerId);
