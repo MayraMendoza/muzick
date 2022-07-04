@@ -37,14 +37,14 @@ public class ListenerController {
         return new ResponseEntity<>(listener, HttpStatus.CREATED);
 
     }
-
+    //get all listeners
     @GetMapping("/")
     public ResponseEntity<List<Listener>> getAllListeners(){
        List<Listener> listeners=  listenerRepository.findAll();
        return new ResponseEntity<>(listeners, HttpStatus.OK);
     }
 
-    //
+    //get one listener
     @GetMapping("/{id}")
     public ResponseEntity<?> getOneListener(@PathVariable Long id){
 //       Listener listener = listenerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
