@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/notes")
+@RequestMapping("/api/notes")
 public class NoteController {
     @Autowired
     private NoteRepository noteRepository;
@@ -29,7 +29,7 @@ public class NoteController {
     }
 
     // create a note by listener
-    @PostMapping("/{listener_id}")
+    @PostMapping("/{listenerId}")
     public ResponseEntity<?> createNote(@PathVariable Long listenerId, @RequestBody Note newNote){
        // TODO validate the listener id is an actual listener
         Listener listener = listenerRepository.findById(listenerId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -39,7 +39,7 @@ public class NoteController {
     }
 
     // get all notes
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<List<Note>> getAllNotes(){
         List<Note> notes = noteRepository.findAll();
         return new ResponseEntity<>(notes, HttpStatus.OK);
