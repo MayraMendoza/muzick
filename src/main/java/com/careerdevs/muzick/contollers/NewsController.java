@@ -42,18 +42,18 @@ public class NewsController {
 
         NewsApi response = restTemplate.getForObject(url,NewsApi.class);
 
-//        List<Article> articleList = new ArrayList<>();
+////        List<Article> articleList = new ArrayList<>();
+//
+//        for(Article article : response.getArticles()){
+//            if(article.getSourceName().equals("wired")){
+//                article.setLikes("hi");
+////                article.add(article);
+//            }
+//        }
 
-        for(Article article : response.getArticles()){
-            if(article.getSourceName().equals("wired")){
-                article.setLikes("hi");
-//                article.add(article);
-            }
-        }
-
-//        System.out.println(response.getStatus());
-//        System.out.println(response.getArticles().get(0).getTitle());
-//        System.out.println(response.getArticles().get(0));
+        System.out.println(response.getStatus());
+        System.out.println(response.getArticles().get(0).getTitle());
+        System.out.println(response.getArticles().get(0));
 
         return new ResponseEntity<>(response, HttpStatus.OK);
 

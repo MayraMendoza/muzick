@@ -20,7 +20,7 @@ public class NoteController {
     @Autowired
     private NoteRepository noteRepository;
 
-    @Autowired
+    @Autowired    //listener repo will be accessible due to autowired
     private ListenerRepository listenerRepository;
 
     @GetMapping("/test")
@@ -63,3 +63,16 @@ public class NoteController {
 
     }
 }
+
+
+
+
+
+//    @PostMapping("/{profileId}")
+//    public ResponseEntity<?> createRestaurantProfile(@PathVariable Long profileId, @RequestBody Restaurant newRestaurant){
+//        // TODO validate
+//        Profile profile = profileRepository.findById(profileId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+//        newNote.setlistener(profile);
+//        Note note =noteRepository.save(newNote);
+//        return new ResponseEntity<>(note, HttpStatus.CREATED);
+//    }
